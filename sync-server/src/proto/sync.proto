@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+option go_package = "./services";
+package sync;
+
+service SyncService {
+    rpc Ping (PingRequest) returns (PingReply);
+    
+    rpc Sync(SyncRequest) returns (SyncResponse);
+    rpc Upload(stream FileUploadRequest) returns(FileUploadResponse);
+    rpc Download(DownloadRequest) returns (stream DownloadResponse);
+    
+    rpc UploadBlocks(stream UploadBlockRequest) returns (UploadResponse);
+    rpc DownloadBlocks(DownloadBlockRequest) returns (stream DownloadBlockResponse);
+}
+
+message SyncRequest {
+  string sep = 1;
+  string user = 2;
+  map<string, FileData> clientTree = 3; 
+  repeated string toRemove = 4;
+}
+
+message SyncResponse {
+  map<string, FileList> elements = 1;
+  repeated ChecksumsList toUpdate = 2;
+  repeated ChecksumsList toClientUpdate = 3;
+}
+
+message UploadBlockRequest {
+  string path = 1;
+  Block block = 2;
+}
+
+message DownloadBlockRequest {
+  string path = 1;
+  uint64 number = 2;
+  int64 block_size = 3;
+  string user = 4;
+}
+
+message DownloadBlockResponse {
+  Block block = 2;
+}
+
+message Block {
+  bool reference = 1; 
+  uint32 number = 2;
+  bytes payload = 3;
+}
+
+message FileData {
+  string path = 1;
+  string fingerprint = 2;
+  string folderFingerprint = 3;
+  string modified = 4;
+  bool isDir = 5;
+  string permissions = 6;
+  int64 size = 7;
+}
+
+message FileList {
+  repeated FileData elements = 1;
+}
+
+message Checksum {
+  string strong = 1;
+}
+
+message ChecksumsList {
+  string path = 1;
+  uint32 block_size = 2;
+  repeated Checksum checksums = 3;
+}
+
+message PingRequest {}
+
+message PingReply {
+  string message = 1;
+}
+
+message FileUploadRequest {
+  string fileName = 1;
+  string folderFingerprint = 2;
+  bytes chunk = 3;
+  string username = 4;
+}
+
+message FileUploadResponse {
+  
+}
+
+message DownloadRequest {
+  string fingerprint = 1;
+}
+
+message DownloadResponse {
+  bytes chunk = 1;
+}
+
+
+message UploadResponse {
+}

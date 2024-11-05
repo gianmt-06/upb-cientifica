@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Files Test</title>
+</head>
+<body>
+    <form action="" id="form" method="post">
+        <div class="form-group">
+          <input type="file" id="file" class="form-control-file" name="uploaded_file">
+          <input type="submit" value="Get me the stats!" class="btn btn-default">
+        </div>
+        <input id="download-btn" type="button" value="download">
+        <img src="http://localhost:1802/files/image?hash=4dba4cdaa9a8fda6df082567f783045ca67202b6b6c801b2c91f7e4c4e6eac05" alt="avatar.jpg" >
+      </form>
+
+      <script>
+        console.log("Your App");
+
+        document.getElementById('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+
+            const file = document.getElementById("file")
+            formData.append("file", file.files[0])
+            formData.append("folderFingerprint", "32e30048197746605ad3c40b0f68d6d67fd870dace567b235b7f8a4772d3080e")
+
+            console.log(formData);
+
+            console.log("Enviando form");
+            fetch("http://localhost:1802/files/upload", {
+                method: "POST",
+                body: formData,
+            }).then((response) => {
+                console.log(response);
+            }).catch(e => {
+                console.error(e)
+            })
+        })      
+
+        document.getElementById('download-btn').addEventListener('click', (e) => {
+            
+            fetch("http://localhost:1802/files/download?path=/alejandro123/helpful_maths.cpp", {
+                method: "GET",
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob(); 
+            }).then(blob => {
+
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'downloaded_file.cpp';
+                
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                window.URL.revokeObjectURL(url);
+            }).catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        })
+      </script>
+</body>
+</html>

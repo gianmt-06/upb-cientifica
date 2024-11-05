@@ -1,0 +1,33 @@
+/* Assets */
+.page-content {
+    padding: 0px 50px;
+    width: 100%;
+    height: 100%;
+}
+
+.ag-cita-title {
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+.form-container-login {
+    margin-top: 30px    ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.login-form {
+    width: 30%;
+}
+
+.button-container {
+    padding-inline: 30%;
+}
+
+.last-group {
+    margin-bottom: 20px;
+}

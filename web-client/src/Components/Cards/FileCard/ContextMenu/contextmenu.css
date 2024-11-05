@@ -1,0 +1,7 @@
+:root {
+    --contexify-zIndex: 666;
+    --contexify-menu-minWidth: 150px;
+    --contexify-menu-padding: 5px;
+    --contexify-menu-radius: 5px;
+    --contexify-menu-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

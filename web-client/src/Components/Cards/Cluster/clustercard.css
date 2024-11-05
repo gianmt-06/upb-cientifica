@@ -1,0 +1,77 @@
+.cluster-job-card {
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  padding: 1.2rem;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.job-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.job-data ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+
+  li {
+    display: flex;
+    gap: 7px;
+    font-size: 14px;
+  }
+}
+
+.job-header {
+  display: flex;
+  gap: 10px;
+}
+
+.job-name {
+  font-size: 20px;
+}
+
+.job-data-sub {
+  font-weight: 600;
+}
+
+.job-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.job-status-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: red;
+}
+
+.job-options {
+    display: flex;
+    gap: 10px;
+}
+
+.job-option-btn {
+    background-color: transparent;
+    color: grey;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 1rem;
+}
+
+.job-option-btn:hover {
+    background-color: rgb(233, 233, 233);
+    border: none;
+    color: black;
+}
