@@ -1,8 +1,8 @@
 import { MpiController } from "../../api/controllers/MpiController";
 import { MpiRouter } from "../../api/routers/MpiRouter";
 import ExpressRouter from "../../contracts/express/route/ExpressRouter";
-import { GrpcFileService } from "../grpc/FileService";
-import { MPIService } from "../grpc/services/MPIService";
+import { GrpcFileService } from "../../grpc/FileService";
+import { MPIService } from "../../grpc/MPIService";
 import { PermissionsValidator } from "../ldap/PermissionsManager";
 
 

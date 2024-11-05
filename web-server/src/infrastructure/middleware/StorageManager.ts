@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { GrpcFileService } from "../grpc/FileService"
+import { GrpcFileService } from "../../grpc/FileService"
 import { PermissionsValidator } from "../ldap/PermissionsManager";
 
 export const validateStorage = async (req: Request, res: Response, next: NextFunction) => {

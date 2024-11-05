@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import Controller from "../../infrastructure/express/controller/Controller";
-import { MPIService } from "../../infrastructure/grpc/services/MPIService";
 import { Logger } from "../../util/Logger";
-import { GrpcFileService } from "../../infrastructure/grpc/FileService";
 import { getFileList } from "../../infrastructure/dataMapper/FilesDataMapper";
+import { FilesServiceInterface } from "../../contracts/services/FileServiceInterface";
+import { MpiServiceInterface } from "../../contracts/services/MpiServiceInterface";
 
 export class MpiController extends Controller {
     private logs: Logger;
 
     constructor(
-        private readonly mpiService: MPIService,
-        private readonly fileService: GrpcFileService
+        private readonly mpiService: MpiServiceInterface,
+        private readonly fileService: FilesServiceInterface
     ) {
         super()
         this.logs = Logger.instance;

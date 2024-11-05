@@ -1,21 +1,21 @@
 import { Request, Response } from "express";
 import Controller from "../../infrastructure/express/controller/Controller"
-import { GrpcFileService } from "../../infrastructure/grpc/FileService";
-import { DownloadRequest, DownloadResponse } from "../../contracts/grpc/fileserver_pb";
-import { FilesCacheManager } from "../../infrastructure/cache/FilesCacheManager";
+import { DownloadRequest, DownloadResponse } from "../../contracts/grpc/storage/fileserver_pb";
 import { Logger } from "../../util/Logger";
 import { getFileList, GRPCfileToDomain } from "../../infrastructure/dataMapper/FilesDataMapper";
 import { getMaxStorage, getUsedStorage } from "../../infrastructure/middleware/StorageManager";
 import axios from "axios";
 import { Environment } from "../../environment/Environment";
+import { CacheManagerInterface } from "../../contracts/services/CacheManagerInterface";
+import { FilesServiceInterface } from "../../contracts/services/FileServiceInterface";
 
 export class FilesController extends Controller {
     private logs: Logger;
     private readonly env: Environment;
 
     constructor(
-        private readonly fileService: GrpcFileService,
-        private readonly fileCacheManager: FilesCacheManager
+        private readonly fileService: FilesServiceInterface,
+        private readonly fileCacheManager: CacheManagerInterface
     ) {
         super();
         this.logs = Logger.instance;

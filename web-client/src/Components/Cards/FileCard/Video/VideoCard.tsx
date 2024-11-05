@@ -6,6 +6,7 @@ import {
 import { useState } from "preact/hooks";
 import { PhotoView } from "react-photo-view";
 import { AbstractMediaItem } from "../../../../domain/AbstractMediaItem";
+import { Environment } from "../../../../environment/Environment";
 
 interface videocardProps {
   file: AbstractMediaItem
@@ -14,32 +15,22 @@ interface videocardProps {
 export const VideoCard: React.FC<videocardProps> = ({file}) => {
 
   const [uri, setUri] = useState("")
+  const env = new Environment();
 
   const setHLS = async (): Promise<string> => {
-    console.log("setting uri");
     
     try {
-      const promise = await fetch("http://10.152.164.104:5000/stream", {
-
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fingerprint: file.getFingerprint()
-        }),
+      const promise = await fetch(`${env.STREAMING_URI}/uri/${file.getFingerprint()}`, {
+        method: "GET"
       });
 
       const response = await promise.json();
-  
-      console.log(response.hls_url);
-      
+
       setUri(response.hls_url);
       return response.hls_url;
     } catch (error) {
       return ""      
     }
-    
   };
 
 
@@ -54,7 +45,7 @@ export const VideoCard: React.FC<videocardProps> = ({file}) => {
               <MediaPlayer
                 className={"player"}
                 title="Sprite Fight"
-                src={"http://192.168.56.3/hls/vod/cFlucrNb5FKbDVue9Wj6xg/oQOIq-1cVW2uELCZECjhkQ/1729663987/_,48,72,0p.mp4.play/master.m3u8"}
+                src={uri}
               >
                 <MediaProvider />
                 <DefaultVideoLayout
@@ -70,8 +61,6 @@ export const VideoCard: React.FC<videocardProps> = ({file}) => {
           className="card-image"
           src={"/assets/lastttt.png"}
           style={{ height: 85 }}
-          // style={{ objectFit: "cover",  }}
-
           alt="video-image"
         />
       </PhotoView>

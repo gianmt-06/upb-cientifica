@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Controller from "../../infrastructure/express/controller/Controller";
 import { CredentialsManager } from "../../infrastructure/ldap/CredentialsManager";
 import { TokenAuth } from "../../infrastructure/middleware/TokenAuth";
-import { GrpcFileService } from "../../infrastructure/grpc/FileService";
+import { GrpcFileService } from "../../grpc/FileService";
 import { Environment } from "../../environment/Environment";
 import { Logger } from "../../util/Logger";
 

@@ -1,4 +1,4 @@
-import { File as GRPCfile } from "../../contracts/grpc/fileserver_pb"
+import { File as GRPCfile } from "../../contracts/grpc/storage/fileserver_pb"
 import { File } from "../../domain/File"
 import { getFileRoute } from "../../util/FileRoute";
 

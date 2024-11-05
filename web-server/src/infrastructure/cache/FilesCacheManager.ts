@@ -1,3 +1,4 @@
+import { CacheManagerInterface } from "../../contracts/services/CacheManagerInterface";
 import { File } from "../../domain/File";
 import { Logger } from "../../util/Logger";
 import { RedisDBC } from "./RedisConnection";
@@ -7,7 +8,7 @@ export interface Folder {
     path: string
 }
 
-export class FilesCacheManager {
+export class FilesCacheManager implements CacheManagerInterface {
     private logs: Logger;
 
     constructor(
@@ -64,7 +65,7 @@ export class FilesCacheManager {
         }
     }
 
-    public update = async (folderFingerprint: string, fileFingerPrint: string,/* attributte: string,*/ value: string): Promise<boolean> => {
+    public update = async (folderFingerprint: string, fileFingerPrint: string, value: string): Promise<boolean> => {
         try {            
             const cacheFolder = await this.getFiles(folderFingerprint);
             const files = cacheFolder.files;            

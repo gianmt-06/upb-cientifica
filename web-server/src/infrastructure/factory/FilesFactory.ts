@@ -3,7 +3,7 @@ import { FilesRouter } from "../../api/routers/FilesRouter";
 import ExpressRouter from "../../contracts/express/route/ExpressRouter";
 import { FilesCacheManager } from "../cache/FilesCacheManager";
 import { RedisDBC } from "../cache/RedisConnection";
-import { GrpcFileService } from "../grpc/FileService";
+import { GrpcFileService } from "../../grpc/FileService";
 import { PermissionsValidator } from "../ldap/PermissionsManager";
 
 export class FilesFactory {

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"gogrpcserver/src/environment"
 	"gogrpcserver/src/infrastructure/database"
-	filesService "gogrpcserver/src/infrastructure/grpcserver/controllers/files"
+	filesService "gogrpcserver/src/grpc"
 	metadataRepo "gogrpcserver/src/infrastructure/repository/metadata"
 	filesRepo "gogrpcserver/src/infrastructure/repository/files"
 	"gogrpcserver/src/util"
